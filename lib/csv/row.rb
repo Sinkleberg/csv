@@ -688,8 +688,10 @@ class CSV
     #
     # Returns the new \Hash suitable for pattern matching containing only the
     # keys specified as an argument.
-    # Hash pattern keys are symbols. To match parsed headers, explicitly use
-    # <tt>header_converters: :symbol</tt> when parsing the \CSV data.
+    # Hash pattern keys are symbols. The +:symbol+ header converter downcases
+    # headers and replaces spaces with underscores: <tt>"First Name"</tt>
+    # becomes +:first_name+. To keep the original case, use
+    # <tt>header_converters: ->(header) { header.to_sym }</tt> instead.
     def deconstruct_keys(keys)
       if keys.nil?
         to_h
